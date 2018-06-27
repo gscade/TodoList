@@ -1,19 +1,20 @@
 
 #change{
-    background-color: #aeb8fb;
+    background-color: #acd0c8;
     overflow:scroll;
     overflow-y: hidden;
+    overflow-x: hidden;
 
 }
 ul, li {
     list-style: none;
 }
 .mynav{
-    width:80%;
+    width:90%;
     background-color:rgba(255, 255,255,0.7);
-    height: 400px;
+    height: 550px;
     padding: 0;
-    margin-top: 64px;
+    margin-top: 40px;
 
 }
 .mynav li{
@@ -32,7 +33,11 @@ ul, li {
 }
 
 .active{
-    background-color:blueviolet;
+    background-color:rgb(11, 187, 11);
+}
+.done {
+    text-decoration: line-through;
+    color: #ff0000;
 }
 
 

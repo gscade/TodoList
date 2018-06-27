@@ -7,12 +7,6 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/bootstrap/3.3.6/bootstrap.min.css" />
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <style>
-            .done {
-                text-decoration: line-through;
-                color: #ff0000;
-            }
-        </style>
     
     <script src="/js/vue.js"></script>
 </head>
@@ -20,52 +14,51 @@
 <body id="change">
     <div id="app">
         <div class="col-md-3 col-md-offset-1" style="min-height: 800px">
-                    <ul class="mynav">
-                           <li><img src="/images/pic3.jpg" style="border-radius:100%; width:50px;height: 50px;float: left;margin-left:30px " >
-                            <span>{{username}}</span>
-                               <a  type="button" href="/logout" class="btn btn-info" style="float:right;margin: 15px 20px 0 0">注销</a> 
-                           </li>
-                           <li><input class="form-control" style="height:100%" type="text" v-if="isSearch" value="search" v-model="searchname" @keyup.Enter="search(searchname)" @blur="isSearch=false;searchname='';isSearch=false" placeholder="请输入代办事项名" style="text-align: center">
-                                <button v-else @click="isSearch=true" class="btn btn-info btn-block" style="height:100%">搜索</button></li>
-                           <li v-for="list,index in lists" @click="selectlist(index)" :class="{'active':lindex===index}">
-                               {{list.lname}}
-                           </li>
+            <ul class="mynav">
+                <li><img src="/images/portrait.jpg" style="border-radius:100%; width:50px;height: 50px;float: left;margin-left:30px " >
+                    <span>{{username}}</span>
+                    <a  type="button" href="/logout" class="btn btn-success" style="float:right;margin: 15px 20px 0 0">注销</a> 
+                </li>
+                <li><input class="form-control" style="height:100%;text-align: center" type="text" v-if="isSearch" value="search" 
+                            v-model="searchname" @keyup.Enter="search(searchname)" 
+                            @blur="isSearch=false;searchname='';isSearch=false" 
+                            placeholder="请输入代办事项名">
+                    <button v-else @click="isSearch=true" class="btn btn-success btn-block" style="height:100%">搜索</button></li>
+                <li v-for="list,index in lists" @click="selectlist(index)" :class="{'active':lindex===index}">
+                    {{list.lname}}
+                </li>
 
-                            <input type="text" style="text-align: center" class="form-control" @keyup.Enter="addList()" v-model="listname" placeholder="新建清单">
-                    </ul>
+                <input type="text" style="text-align: center" class="form-control" @keyup.Enter="addList()" v-model="listname" placeholder="新建清单">
+            </ul>
             </div>
-            <div class="col-md-7" style="min-height: 600px;background-color:rgba(255, 255,255,0.7);margin-top: 30px" >
+            <div class="col-md-7" style="min-height: 650px;background-color:rgba(255, 255,255,0.7);margin-top: 40px" >
                 <div style="border-bottom: black;border-bottom:solid 2px;">
                     <div class="page-content">
                         <h1 style="margin-left: 60px">{{lists[lindex].lname}}
-                                <button type="button" class="btn btn-info" style="float:right" @click="show=!show">
-                                        {{GetShowName()}}
-                                    <span  v-if="!show"></span>
-                                </button>
-                                <button  @click="changecolor()" style="float: right" class="btn btn-info">更改颜色</button>
-                                <button  @click="deleteList()" v-if="lindex>1" style="float: right" class="btn btn-info">删除</button>
+                            <button type="button" class="btn btn-success" style="float:right" @click="show=!show">
+                                    {{GetShowName()}}
+                                <span  v-if="!show"></span>
+                            </button>
+                            <button  @click="changecolor()" style="float: right" class="btn btn-success">更改颜色</button>
+                            <button  @click="deleteList()" v-if="lindex>1" style="float: right" class="btn btn-success">删除</button>
                         </h1>
-                        
                     </div>
                 </div>
-                    <button @click="queren()" class="btn btn-info pull-right" >确认修改</button>
-                    <button style="float:right;" @click="sort()" class="btn btn-info">排序</button>
+                    <button @click="queren()" class="btn btn-success pull-right" >确认修改</button>
+                    <button style="float:right;" @click="sort()" class="btn btn-success">排序</button>
                 <div v-if="!isSearch">
                     <ul>
                         <li><input type="text" class="form-control" v-model="thingname" @keyup.Enter="addThing()" placeholder="添加代办事项">
-                            
                         </li>
                         <li v-for="thing,index in lists[lindex].things" v-if="showDone(thing)" style="height: 40px;">
-                                <input style="height:16px;width:16px;" type="checkbox" @click="finish(index)" :checked="thing.done">
+                                <input style="height:16px;width:16px;" type="checkbox" @click="complete(index)" :checked="thing.done">
                                 <span class="thing-style" :class="{'done':thing.done}">
-                                <span>{{thing.tname}}</span>
-                                <!-- <input type="text" v-model="thing.tname"> -->
-                                <span>{{thing.date}}</span>
+                                    <span>{{thing.tname}}</span>
+                                    <span>{{thing.date}}</span>
                                 </span>
-                                <input type="date" v-model="thing_date" v-if="thing.date===''"></input>
-                                <button @click="confirm(index)" class="btn btn-info pull-right" v-if="thing.date===''">确认</button>
-                                <button @click="editThings(index)" class="btn btn-info pull-right" >修改</button>
-                                
+                                <input type="date" v-model="thing_date" v-if="thing.date===''">
+                                <button @click="confirm(index)" class="btn btn-success pull-right" v-if="thing.date===''">确认</button>
+                                <button @click="editThings(index)" class="btn btn-success pull-right" >修改</button>
                         </li>
                     </ul>
                 </div>
@@ -74,12 +67,10 @@
                             {{thing}}
                     </li>
                 </div>
-
             </div>
-            
     </div>
   
-    </body>  
+</body>  
 <script>
 var store = {
     save(key, value) { 
@@ -119,14 +110,14 @@ var vm = new Vue({
     watch: {
         lists: {
             handler: function() {
-                store.save('vue-dotolist', this.lists);
+                store.save('todolist', this.lists);
             },
             deep: true
         }
     },
     mounted:function(){
-        if(store.fetch('vue-dotolist').length>0)
-        this.lists=store.fetch('vue-dotolist');
+        if(store.fetch('todolist').length>0)
+        this.lists=store.fetch('todolist');
         
         var getUserName=this.getUserName;
         $.get('/user',function(data){
@@ -163,7 +154,7 @@ var vm = new Vue({
             this.lists[this.lindex].things.push(thing);
             this.thingname=''
         },
-        finish: function(index) {
+        complete: function(index) {
             var done = this.lists[this.lindex].things[index].done;
             this.lists[this.lindex].things[index].done = !done;
         },
@@ -172,10 +163,10 @@ var vm = new Vue({
         },
         changecolor:function(){
             if(this.ischange===false){
-                 document.getElementById("change").style.background=" #acd0c8"
+                 document.getElementById("change").style.background=" #aeb8fb"
                  this.ischange = !this.ischange
             }else(
-                document.getElementById("change").style.background=" #aeb8fb",
+                document.getElementById("change").style.background=" #acd0c8",
                 this.ischange = !this.ischange
             )
         }, 
@@ -220,8 +211,6 @@ var vm = new Vue({
                 this.lists[this.lindex].things[i].days = days;
 
             }
-            
-			// var matter = new Array();
 	        for(var i=0;i<this.lists[this.lindex].things.length;i++) {
 	            for(var j=i+1;j<this.lists[this.lindex].things.length;j++) {
 	                if(this.lists[this.lindex].things[i].days>this.lists[this.lindex].things[j].days) {
@@ -243,17 +232,5 @@ var vm = new Vue({
     },
     
 });
-
-function watchHashChange() {
-    var hash = window.location.hash.slice(1);
-    vm.visibility = hash;
-    //console.log(hash)
-}
-
-
-watchHashChange();
-
-window.addEventListener('hashchange', watchHashChange);
-
 </script>
 </html>
