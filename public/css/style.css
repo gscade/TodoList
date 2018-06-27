@@ -1,0 +1,38 @@
+
+#change{
+    background-color: #aeb8fb;
+    overflow:scroll;
+    overflow-y: hidden;
+
+}
+ul, li {
+    list-style: none;
+}
+.mynav{
+    width:80%;
+    background-color:rgba(255, 255,255,0.7);
+    height: 400px;
+    padding: 0;
+    margin-top: 64px;
+
+}
+.mynav li{
+    width:100%;
+    height: 52px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+}
+.mynav li:hover{
+    background-color:rgba(0, 0,0,0.1);
+}
+
+.thing-style{
+    cursor: default;
+}
+
+.active{
+    background-color:blueviolet;
+}
+
+

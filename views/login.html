@@ -1,0 +1,20 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Login</title>  
+    <link rel="stylesheet" type="text/css" href="/css/css.css"/>  
+</head>  
+<body>  
+    <div id="login">  
+        <h1>Login</h1>  
+        <form method="POST" action="/login_post">  
+            <input type="text" required="required" placeholder="用户名" name="name" v-model="formData.username"></input>  
+            <input type="password" required="required" placeholder="密码" name="p" v-model="formData.password"></input>  
+            <button class="but" type="submit">登录</button>
+            <a class="but" type="button" href="/register" style="width: 270px">注册</a>    
+        </form>  
+    </div>  
+</body>  
+</html> 
+
